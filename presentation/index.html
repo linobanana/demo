@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation Task</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="./assets/1_a5qDeoPp9d3JgDPpIya7pw.png" data-background-repeat="repeat" data-background-size="200px">
+					<h1 style="color: rgb(247, 168, 21)">What is Lodash.js?</h1>
+				</section>
+
+				<section>
+					<h2>Useful links</h2>
+					<ul>
+						<li>
+							<h4>
+								<a href="https://lodash.com/">Official site</a>
+							</h4>
+						</li>
+						<li>
+							<h4>
+								<a href="https://github.com/lodash/lodash">GitHub repository</a>
+							</h4>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Why Lodash?</h2>
+					<h5 class="fragment" style="color: rgb(247, 168, 21)">Lodash's modular methods are great for...</h5>
+					<ul>
+						<li class="fragment">Iterating arrays, objects, strings</li>
+						<li class="fragment">Manipulating & testing values</li>
+						<li class="fragment">Creating composite functions</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>Getting started</h2>
+					</section>
+					<section>
+						<h4>
+							In a browser:
+							<pre><code class="hljs" data-trim>
+&lt;script src="lodash.js"&gt;&lt;/script&gt;
+							</code></pre>
+						</h4>
+					</section>
+					<section>
+						<h4>
+							Using npm:
+							<pre><code class="hljs" data-trim>
+$ npm i -g npm
+$ npm i --save lodash
+							</code></pre>
+						</h4>
+					</section>
+					<section>
+						<h4>
+							In Node.js:
+							<pre><code class="hljs" data-trim>
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+ 
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
+ 
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require('lodash/at');
+var curryN = require('lodash/fp/curryN');
+							</code></pre>
+						</h4>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Lodash.js features</h2>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.chunk(array, [size=1])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1,4">
+_.chunk(['a', 'b', 'c', 'd'], 2);
+// => [['a', 'b'], ['c', 'd']]
+ 
+_.chunk(['a', 'b', 'c', 'd'], 3);
+// => [['a', 'b', 'c'], ['d']]
+						</code></pre>
+						<p>Returns the new array of chunks</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.drop / _.dropRight (array, [n=1])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1,4">
+_.drop([1, 2, 3], 2);
+// => [3]
+
+_.dropRight([1, 2, 3], 2);
+// => [1]
+						</code></pre>
+						<p>Returns the slice of array</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.flatten(array)</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1,3,6,9">
+var array = [1, [2, [3, [4]], 5]];
+
+_.flatten(array);
+// => [1, 2, [3, [4]], 5]
+
+_.flattenDeep(array);
+// => [1, 2, 3, 4, 5]
+
+_.flattenDepth(array, 2);
+// => [1, 2, 3, [4], 5]
+						</code></pre>
+						<p>Returns the new flattened array</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.uniq(array)</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1">
+_.uniq([2, 1, 2]);
+// => [2, 1]
+						</code></pre>
+						<p>Returns the new duplicate free array</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.zip([arrays])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1">
+_.zip(['a', 'b'], [1, 2], [true, false]);
+// => [['a', 1, true], ['b', 2, false]]
+						</code></pre>
+						<p>Returns the new array of grouped elements</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.debounce(func, [wait=0], [options={}])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1, 3, 5-6">
+function validateEmail() {
+  // Validate email here and show error message if not valid
+}
+
+let emailInput = document.getElementById("email-field");
+emailInput.addEventListener("keyup", _.debounce(validateEmail, 500));
+						</code></pre>
+						<p>Returns the new debounced function</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.gt / _.gte (value, other)</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1, 4, 7, 10">
+_.gt(3, 1);
+// => true
+ 
+_.gt(3, 3);
+// => false
+
+_.gte(3, 1);
+// => true
+ 
+_.gte(3, 3);
+// => true
+						</code></pre>
+						<p>Returns true if value is greater (or equal in case _.gte) than other, else false</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.isArrayLike(value)</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1, 4, 7, 10">
+_.isArrayLike([1, 2, 3]);
+// => true
+ 
+_.isArrayLike(document.body.children);
+// => true
+ 
+_.isArrayLike('abc');
+// => true
+ 
+_.isArrayLike(_.noop);
+// => false
+						</code></pre>
+						<p>Returns true if value is array-like, else false</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.capitalize([string=''])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1, 4, 7">
+_.capitalize('FRED');
+// => 'Fred'
+
+_.capitalize('uniq');
+// => 'Uniq'
+
+_.capitalize('AbRAKadabRa');
+// => 'Abrakadabra'
+						</code></pre>
+						<p>Returns the capitalized string</p>
+					</section>
+					<section>
+						<h4 style="color: rgb(247, 168, 21)">_.trim([string=''], [chars=whitespace])</h4>
+						<pre><code class="hljs" data-trim data-line-numbers="1, 4">
+_.trim('  abc  ');
+// => 'abc'
+ 
+_.trim('-_-abc-_-', '_-');
+// => 'abc'
+						</code></pre>
+						<p>Returns the trimmed string</p>
+					</section>
+					</section>
+				</section>
+
+				<section>
+					<h2 style="color: rgb(247, 168, 21)">Conclusion</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
